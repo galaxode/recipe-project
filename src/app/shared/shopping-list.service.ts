@@ -22,4 +22,8 @@ export class ShoppingListService {
    removeItem() {
 
    }
+
+   addRecipeIngredients(recipeIngredients: Ingredient[]) {
+     this.ingredients = this.ingredients.concat(recipeIngredients);
+   }
 }
