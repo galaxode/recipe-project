@@ -6,18 +6,19 @@ import { Ingredient } from '../shared/ingredient.model';
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
+
   private recipes: Recipe[] = [
     new Recipe(
       'Hot Dogs',
       'This is classic favorite at barbecues!',
-      'https://c1.staticflickr.com/9/8492/28755393040_c3b4c4853d_b.jpg',
+      'http://blogs.mcgill.ca/oss/files/2013/04/hot-dog.jpg',
       [
         new Ingredient('Buns', 4),
         new Ingredient('Weiners', 4)
       ]),
     new Recipe('Apple Pie',
       'Luscious and juicy pie filled with apples. It is so very delitchous',
-      'https://c1.staticflickr.com/9/8492/28755393040_c3b4c4853d_b.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/a/af/Steven%27s_Apple_Pie.jpg',
       [
         new Ingredient('Apples', 5),
         new Ingredient('Pie Crust', 1)
@@ -34,5 +35,9 @@ export class RecipeService {
 
   removeRecipe() {
 
+  }
+
+  getRecipeByIndex(index: number): Recipe {
+    return this.recipes[index];
   }
 }
