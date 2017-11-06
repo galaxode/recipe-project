@@ -13,7 +13,6 @@ import { RecipeService } from '../recipe.service';
 export class RecipeEditComponent implements OnInit {
   id: number;
   editMode = false;
-  ingredients: Ingredient[] = [];
   recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
@@ -32,25 +31,49 @@ export class RecipeEditComponent implements OnInit {
     let name = '';
     let imagePath = '';
     let description = '';
+    let ingredients = new FormArray([]);
 
     if (this.editMode) {
       const recipe = this.recipeService.getRecipeByIndex(this.id);
       name = recipe.name;
       imagePath = recipe.imagePath;
       description = recipe.description;
+      if (recipe.ingredients) {
+        for (let ingredient of recipe.ingredients) {
+          ingredients.push(
+            new FormGroup({
+              'name': new FormControl(ingredient.name, Validators.required),
+              'amount': new FormControl(ingredient.amount, [
+                Validators.required,
+                Validators.pattern(/^[1-9]+[0-9]*$/)
+              ])
+            })
+          );
+        }
+      }
     }
 
     this.recipeForm = new FormGroup({
       'name': new FormControl(name, Validators.required),
-      'imagePath': new FormControl(imagePath),
-      'description': new FormControl(description),
-      'ingredients': new FormArray([])
+      'imagePath': new FormControl(imagePath, Validators.required),
+      'description': new FormControl(description, Validators.required),
+      'ingredients': ingredients
     });
   }
 
+  onSubmit() {
+    console.log(this.recipeForm);
+  }
+
   onAddIngredient() {
-    const control = new FormControl(null, Validators.required);
-    (<FormArray>this.recipeForm.get('ingredients')).push(control);
+    const group = new FormGroup({
+      'name': new FormControl(null, Validators.required),
+      'amount': new FormControl(null, [
+         Validators.required,
+         Validators.pattern(/^[1-9]+[0-9]*$/)
+      ])
+    });
+    (<FormArray>this.recipeForm.get('ingredients')).push(group);
   }
 
 }

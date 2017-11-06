@@ -7,7 +7,7 @@ export class RecipeService {
     new Recipe(
       'Hot Dogs',
       'This is classic favorite at barbecues!',
-      'http://blogs.mcgill.ca/oss/files/2013/04/hot-dog.jpg',
+      'http://www.publicdomainpictures.net/pictures/130000/velka/hotdog-mustard-only.jpg',
       [
         new Ingredient('Buns', 4),
         new Ingredient('Weiners', 4)
