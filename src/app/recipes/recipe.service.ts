@@ -7,25 +7,30 @@ export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
-    new Recipe(
-      'Hot Dogs',
-      'This is classic favorite at barbecues!',
-      'http://www.publicdomainpictures.net/pictures/130000/velka/hotdog-mustard-only.jpg',
-      [
-        new Ingredient('Buns', 4),
-        new Ingredient('Weiners', 4)
-      ]),
-    new Recipe('Apple Pie',
-      'Luscious and juicy pie filled with apples.',
-      'https://upload.wikimedia.org/wikipedia/commons/a/af/Steven%27s_Apple_Pie.jpg',
-      [
-        new Ingredient('Apples', 5),
-        new Ingredient('Pie Crust', 1)
-      ])
+    // new Recipe(
+    //   'Hot Dogs',
+    //   'This is classic favorite at barbecues!',
+    //   'http://www.publicdomainpictures.net/pictures/130000/velka/hotdog-mustard-only.jpg',
+    //   [
+    //     new Ingredient('Buns', 4),
+    //     new Ingredient('Weiners', 4)
+    //   ]),
+    // new Recipe('Apple Pie',
+    //   'Luscious and juicy pie filled with apples.',
+    //   'https://upload.wikimedia.org/wikipedia/commons/a/af/Steven%27s_Apple_Pie.jpg',
+    //   [
+    //     new Ingredient('Apples', 5),
+    //     new Ingredient('Pie Crust', 1)
+    //   ])
   ];
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.emitRecipesChange();
   }
 
   addRecipe(recipe: Recipe) {
