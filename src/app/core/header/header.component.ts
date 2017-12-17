@@ -32,4 +32,8 @@ export class HeaderComponent {
     this.authService.logout();
     this.router.navigate(['/signin']);
   }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
 }
